@@ -1,0 +1,177 @@
+#include<stdio.h>
+#include<stdlib.h>
+void matrix_multiplication()
+{
+    int a[5][5],b[5][5],c[5][5],row1,col1,row2,col2,i,j,k;
+    printf("\nENTER NUMBER OF ROWS AND COLUMNS OF FIRST MATRIX:");
+    scanf("%d%d",&row1,&col1);
+    printf("\nENTER NUMBER OF ROWS AND COLUMNS OF SECOND MATRIX:");
+    scanf("%d%d",&row2,&col2);
+    if(col1!=row2)
+    {
+        printf("\nMATRIX MULTIPLICATION OF GIVEN DIMENSIONS IS NOT POSSIBLE\n");
+    }
+    else
+    {
+            printf("ENTER THE ELEMENTS OF THE FIRST MATRIX:\n");
+            for(i=0;i<row1;i++)
+            {
+                for(j=0;j<col1;j++)
+                {
+                    printf("ENTER VALUE OF A[%d][%d]:",i,j);
+                    scanf("%d",&a[i][j]);
+                }
+            }
+            printf("ENTER THE ELEMENTS OF THE SECOND MATRIX:\n");
+            for(i=0;i<row2;i++)
+            {
+                for(j=0;j<col2;j++)
+                {
+                    printf("ENTER VALUE OF B[%d][%d]:",i,j);
+                    scanf("%d",&b[i][j]);
+                }
+            }
+            printf("FIRST MATRIX IS\n");
+            for(i=0;i<row1;i++)
+            {
+                for(j=0;j<col1;j++)
+                {
+                    printf("%d\t",a[i][j]);
+                }
+                printf("\n");
+            }
+             printf("SECOND MATRIX IS\n");
+            for(i=0;i<row2;i++)
+            {
+                for(j=0;j<col2;j++)
+                {
+                    printf("%d\t",b[i][j]);
+                }
+                printf("\n");
+            }
+             printf("MULTIPLICATION OF MATRIX IS\n");
+            for(i=0;i<row1;i++)
+            {
+                for(j=0;j<col1;j++)
+                {
+                    c[i][j]=0;
+                   for(k=0;k<col1;k++)
+                   {
+                       c[i][j]=c[i][j]+a[i][k]*b[k][j];
+                   }
+                }
+            }
+            for(i=0;i<row1;i++)
+            {
+                for(j=0;j<col2;j++)
+                {
+                    printf("%d\t",c[i][j]);
+                }
+                printf("\n");
+            }
+    }
+
+}
+void matrix_transpose()
+{
+    int a[5][5],b[5][5],i,j,row,col;
+    printf("\nENTER NUMBER OF ROWS AND COLUMNS OF THE MATRIX:");
+    scanf("%d%d",&row,&col);
+    printf("ENTER THE ELEMENTS OF THE MATRIX:\n");
+    for(i=0;i<row;i++)
+    {
+        for(j=0;j<col;j++)
+        {
+            printf("ENTER VALUE OF A[%d][%d]:",i,j);
+            scanf("%d",&a[i][j]);
+        }
+    }
+    printf("\nTHE ORIGINAL MATRIX IS:\n");
+    for(i=0;i<row;i++)
+    {
+        for(j=0;j<col;j++)
+        {
+            printf("%d\t",a[i][j]);
+            b[i][j]=a[j][i];
+        }
+        printf("\n");
+    }
+    printf("\nTRANSPOSE OF THE GIVEN MATRIX IS\n");
+    for(i=0;i<row;i++)
+    {
+        for(j=0;j<col;j++)
+        {
+            printf("%d\t",b[i][j]);
+        }
+        printf("\n");
+    }
+}
+void matrix_diagonal_swap()
+{
+    int a[5][5],b[5][5],i,j,row,col;
+    printf("\nENTER NUMBER OF ROWS AND COLUMNS OF THE MATRIX:");
+    scanf("%d%d",&row,&col);
+    printf("ENTER THE ELEMENTS OF THE MATRIX:\n");
+    for(i=0;i<row;i++)
+    {
+        for(j=0;j<col;j++)
+        {
+            printf("ENTER VALUE OF A[%d][%d]:",i,j);
+            scanf("%d",&a[i][j]);
+        }
+    }
+    printf("\nTHE ORIGINAL MATRIX IS:\n");
+    for(i=0;i<row;i++)
+    {
+        for(j=0;j<col;j++)
+        {
+            printf("%d\t",a[i][j]);
+            b[i][j]=a[j][i];
+        }
+        printf("\n");
+    }
+    for(i=0;i<row;i++)
+    {
+        for(j=0;j<col;j++)
+        {
+            if(i==j)
+            {
+                int temp=a[i][j];
+                a[i][j]=a[i][col-i-1];
+                a[i][col-i-1]=temp;
+            }
+        }
+    }
+    printf("\nAFTER DIAGONAL SWAP MATRIX IS:\n");
+    for(i=0;i<row;i++)
+    {
+        for(j=0;j<col;j++)
+        {
+            printf("%d\t",a[i][j]);
+        }
+        printf("\n");
+    }
+}
+int main()
+{
+    int choice;
+    printf("MENU DRIVEN MATRIX PROGRAM\n\n");
+    while(1)
+    {
+        printf("\n\n1. MULTIPLICATION OF TWO MATRIX\n2. TRANSPOSE OF A MATRIX\n3. DIAGONAL SWAP OF A MATRIX\n4. EXIT\n\nPLEASE ENTER YOUR CHOICE:");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1: matrix_multiplication();
+                    break;
+            case 2: matrix_transpose();
+                    break;
+            case 3: matrix_diagonal_swap();
+                    break;
+            case 4: exit(0);
+            default:    printf("\nPLEASE ENTER A VALID CHOICE!!\n");
+        }
+    }
+
+    return 0;
+}
